@@ -17,7 +17,7 @@ class MyExcelController extends Controller
         $rows = Excel::selectSheetsByIndex(0)
 		             ->load($file)
 		             ->get();
-		// dump($rows);
+		// dd($rows);
 	    
 		foreach ($rows as $key => $row) {
 			$phone = str_replace(["(", ")", ".", " ", "+", "-"], "", $row->phone);
