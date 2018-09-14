@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('loadExcel', 'MyExcelController@loadExcel');
+
+Route::resource('clientcases', 'ClientcaseController');
