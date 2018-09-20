@@ -14,14 +14,16 @@ class ClientcaseController extends Controller
      */
     public function index()
     {
-        echo "I'm in index method";
+        // echo "I'm in index method";
 
-        $clientcases = Clientcase::all();
-        dump($clientcases);
+        $clientcases = Clientcase::orderBy('Case #', 'desc')->paginate(15);
+        // dump($clientcases);
 
-        foreach ($clientcases as $clientcase) {
-            echo $clientcase->{'Client Name'}."<br>";
-        }
+        // foreach ($clientcases as $clientcase) {
+        //     echo $clientcase->{'Client Name'}."<br>";
+        // }
+
+        return view('clientcases.index')->withClientcases($clientcases);
     }
 
     /**
@@ -31,7 +33,7 @@ class ClientcaseController extends Controller
      */
     public function create()
     {
-        //
+        return view('clientcases.create');
     }
 
     /**
@@ -42,7 +44,15 @@ class ClientcaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dump($request->all());
+        // dd();
+
+        $clientcase = new Clientcase;
+
+        $clientcase->{'Case #'} = $request['case_num'];
+        $clientcase->{'Client Name'} = $request['client_name'];
+
+        $clientcase->save();
     }
 
     /**
@@ -53,7 +63,9 @@ class ClientcaseController extends Controller
      */
     public function show($id)
     {
-        dump(Clientcase::find($id));
+        $clientcase = Clientcase::find($id);
+
+        return view('clientcases.show')->withClientcase($clientcase);
     }
 
     /**
@@ -76,7 +88,11 @@ class ClientcaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $clientcase = Clientcase::find($id);
+
+        $clientcase->Caller = $request["Caller"];
+
+        $clientcase->save();
     }
 
     /**
