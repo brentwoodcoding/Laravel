@@ -17,7 +17,7 @@ class ClientcaseController extends Controller
         // echo "I'm in index method";
 
         $clientcases = Clientcase::orderBy('Case #', 'desc')->paginate(15);
-        // dump($clientcases);
+        // dd($clientcases);
 
         // foreach ($clientcases as $clientcase) {
         //     echo $clientcase->{'Client Name'}."<br>";
@@ -64,8 +64,10 @@ class ClientcaseController extends Controller
     public function show($id)
     {
         $clientcase = Clientcase::find($id);
+        // dump($clientcase);
+        // dd($clientcase->toArray());
 
-        return view('clientcases.show')->withClientcase($clientcase);
+        return view('clientcases.show')->with('clientcase', $clientcase);
     }
 
     /**

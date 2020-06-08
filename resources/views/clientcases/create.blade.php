@@ -9,6 +9,7 @@
         <div class="col-md-6">
             <form action="{{ route('clientcases.store') }}" method="POST">
               {{ csrf_field() }}
+
               <div class="form-group">
                 <label name="case_num">Case number:</label>
                 <input id="case_num" name="case_num" class="form-control">
